@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RAMTIN MESGARI</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --cursor-pixel: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><rect x="0" y="0" width="6" height="6" fill="black"/><rect x="1" y="1" width="4" height="4" fill="white"/></svg>')
+            0 0,
+          auto;
+      }
+
+      @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Cormorant:wght@300;400;500;600;700&family=Archivo+Narrow:wght@400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Bebas+Neue:wght@400&family=Rowdies:wght@300;400;700&family=Questrial:wght@400&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+      body {
+        font-family: "Poppins", Arial, Helvetica, sans-serif;
+        background: #1a1a1a;
+        background-image: radial-gradient(
+            circle at 1px 1px,
+            rgba(255, 255, 255, 0.15) 1px,
+            transparent 0
+          ),
+          radial-gradient(
+            circle at 3px 3px,
+            rgba(255, 255, 255, 0.08) 0.5px,
+            transparent 0
+          );
+        background-size: 16px 16px, 32px 32px;
+        color: #fff;
+        line-height: 1.1;
+        overflow-x: hidden;
+        cursor: var(--cursor-pixel);
+      }
+
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #ff6b35;
+        border-bottom: 4px solid #202020;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        height: 70px;
+      }
+
+      .logo {
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        font-family: "Bebas Neue", sans-serif;
+        color: #202020;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 35px;
+      }
+
+      .nav-links a {
+        color: #202020;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: transform 0.1s ease;
+        font-family: "Archivo Narrow", sans-serif;
+        cursor: var(--cursor-pixel);
+      }
+
+      .nav-links a:hover {
+        transform: translate(3px, -3px);
+      }
+
+      .main-container {
+        margin-top: 70px;
+        min-height: calc(100vh - 70px);
+      }
+
+      .hero-section {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        min-height: calc(100vh - 60px);
+        border-bottom: 3px solid #202020;
+      }
+
+      .hero-left {
+        background: #fff;
+        background-image: radial-gradient(
+          circle at 0.5px 0.5px,
+          rgba(0, 0, 0, 0.12) 0.5px,
+          transparent 0
+        );
+        background-size: 8px 8px;
+        padding: 80px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 3px solid #202020;
+      }
+
+      .hero-right {
+        background: #2b5ce6;
+        background-image: radial-gradient(
+          circle at 2px 2px,
+          rgba(255, 255, 255, 0.15) 1px,
+          transparent 0
+        );
+        background-size: 16px 16px;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #fff;
+      }
+
+      .hero-title {
+        font-size: clamp(48px, 8vw, 120px);
+        font-weight: 800;
+        line-height: 0.85;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        font-family: "Oswald", sans-serif;
+        color: #202020;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(18px, 3vw, 28px);
+        font-weight: 300;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        font-family: "JetBrains Mono", monospace;
+        color: #202020;
+      }
+
+      .hero-description {
+        font-size: 16px;
+        margin-bottom: 40px;
+        max-width: 450px;
+        color: #202020;
+      }
+
+      .contact-info {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .contact-info a {
+        color: #fff;
+        text-decoration: none;
+        transition: transform 0.1s ease;
+        cursor: var(--cursor-pixel);
+      }
+
+      .contact-info a:hover {
+        transform: translate(1px, -1px);
+      }
+
+      .stack-list {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .code-section {
+        background: #202020;
+        background-image: radial-gradient(
+          circle at 1.5px 1.5px,
+          rgba(255, 255, 255, 0.08) 1px,
+          transparent 0
+        );
+        background-size: 14px 14px;
+        color: #fff;
+        padding: 80px 0;
+      }
+
+      .code-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .code-header {
+        padding: 0 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .code-title {
+        font-size: clamp(32px, 6vw, 64px);
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 0.9;
+        margin-bottom: 20px;
+        font-family: "Oswald", sans-serif;
+      }
+
+      .code-subtitle {
+        font-size: 16px;
+        color: #ccc;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+        background: #333;
+      }
+
+      .project-card {
+        background: #fff;
+        color: #202020;
+        padding: 30px;
+        cursor: var(--cursor-pixel);
+        transition: all 0.1s ease;
+        position: relative;
+      }
+
+      .project-card:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 4px 4px 0px #202020;
+      }
+
+      .project-card:active {
+        transform: translate(0px, 0px);
+        box-shadow: 2px 2px 0px #202020;
+      }
+
+      .project-name {
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .project-links a {
+        display: inline-block;
+        margin: 3px 8px 3px 0;
+        color: #202020;
+        text-decoration: none;
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: 700;
+        transition: transform 0.1s ease;
+        cursor: var(--cursor-pixel);
+      }
+
+      .project-links a:hover {
+        transform: translate(1px, -1px);
+      }
+
+      .discoveries-section {
+        background: #ffffff;
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgba(0, 0, 0, 0.12) 0.8px,
+          transparent 0
+        );
+        background-size: 18px 18px;
+        color: #202020;
+        padding: 80px 60px;
+        border-bottom: 3px solid #202020;
+      }
+
+      .discoveries-title {
+        font-size: clamp(40px, 7vw, 80px);
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        line-height: 0.9;
+        font-family: "Oswald", sans-serif;
+      }
+
+      .theory-block {
+        max-width: 800px;
+        margin-bottom: 40px;
+      }
+
+      .theory-name {
+        font-size: 24px;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+      }
+
+      .theory-text {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .theory-links a {
+        color: #202020;
+        text-decoration: none;
+        font-weight: 700;
+        margin-right: 20px;
+        transition: transform 0.1s ease;
+        cursor: var(--cursor-pixel);
+      }
+
+      .theory-links a:hover {
+        transform: translate(2px, -2px);
+      }
+
+      .quote-section {
+        background: #202020;
+        color: #fff;
+        padding: 40px;
+        margin: 40px 0;
+        border: 3px solid #202020;
+      }
+
+      .quote-text {
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .culture-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        border-bottom: 3px solid #202020;
+      }
+
+      .culture-tab {
+        padding: 60px 40px;
+        border-right: 3px solid #202020;
+        min-height: 500px;
+      }
+
+      .culture-tab:nth-child(1) {
+        background: #fff;
+   
+        background-image: radial-gradient(
+          circle at 7px 7px,
+          rgba(69, 69, 69, 0.071) 2px,
+          transparent 0px
+        );
+        background-size: 10px 10px;
+        color: #000;
+      }
+
+      .culture-tab:nth-child(2) {
+        background: #fff27b;
+        background-image: radial-gradient(
+          circle at 2px 2px,
+          rgba(69, 69, 69, 0.071) 1.25px,
+          transparent 0
+        );
+        background-size: 10px 10px;
+        color: #202020;
+      }
+
+      .culture-tab:nth-child(3) {
+        background: #fff;
+        background-image: radial-gradient(
+          circle at 7px 7px,
+          rgba(69, 69, 69, 0.071) 2px,
+          transparent 0px
+        );
+        background-size: 22px 22px;
+        color: #202020;
+      }
+
+      .culture-tab h3 {
+        font-size: 24px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        border-bottom: 3px solid currentColor;
+        padding-bottom: 8px;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .culture-item {
+        margin-bottom: 25px;
+        border-bottom: 1px solid currentColor;
+        padding-bottom: 15px;
+        cursor: var(--cursor-pixel);
+        transition: all 0.1s ease;
+      }
+
+      .culture-item:hover {
+        transform: translateX(3px);
+      }
+
+      .culture-item:active {
+        transform: translateX(1px);
+      }
+
+      .culture-item:last-child {
+        border-bottom: none;
+      }
+
+      .culture-item strong {
+        display: block;
+        font-size: 14px;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+
+      .culture-item span {
+        font-size: 12px;
+        opacity: 0.8;
+      }
+
+      .contact-section {
+        background: #fff;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 60vh;
+      }
+
+      .contact-left {
+        background: #202020;
+        color: #fff;
+        padding: 80px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .contact-title {
+        font-size: clamp(48px, 8vw, 96px);
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        font-family: "Oswald", sans-serif;
+      }
+
+      .contact-subtitle {
+        font-size: 16px;
+        font-family: "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        opacity: 0.8;
+      }
+
+      .contact-right {
+        background: #fff;
+        background-image: radial-gradient(
+          circle at 3px 3px,
+          rgba(0, 0, 0, 0.08) 1px,
+          transparent 0
+        );
+        background-size: 20px 20px;
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .contact-list {
+        list-style: none;
+      }
+
+      .contact-item {
+        border-bottom: 2px solid #202020;
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .contact-item:last-child {
+        border-bottom: none;
+      }
+
+      .contact-label {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-family: "JetBrains Mono", monospace;
+        color: #202020;
+      }
+
+      .contact-link {
+        color: #202020;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.1s ease;
+        position: relative;
+        cursor: var(--cursor-pixel);
+      }
+
+      .contact-link:hover {
+        transform: translateX(3px);
+      }
+
+      .contact-link:active {
+        transform: translateX(1px);
+      }
+
+      @media (max-width: 768px) {
+        .top-bar {
+          padding: 10px 15px;
+          height: 50px;
+        }
+
+        .nav-links {
+          gap: 15px;
+        }
+
+        .nav-links a {
+          font-size: 12px;
+        }
+
+        .main-container {
+          margin-top: 50px;
+        }
+
+        .hero-section {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+
+        .hero-left {
+          border-right: none;
+          border-bottom: 3px solid #202020;
+          padding: 40px 20px;
+        }
+
+        .hero-right {
+          padding: 40px 20px;
+        }
+
+        .code-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .code-header {
+          padding: 0 20px 40px;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .discoveries-section {
+          padding: 40px 20px;
+        }
+
+        .culture-section {
+          grid-template-columns: 1fr;
+        }
+
+        .culture-tab {
+          border-right: none;
+          border-bottom: 3px solid #202020;
+          padding: 40px 20px;
+        }
+
+        .culture-tab:last-child {
+          border-bottom: none;
+        }
+
+        .contact-section {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-left {
+          padding: 40px 20px;
+          text-align: center;
+        }
+
+        .contact-right {
+          padding: 40px 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero-left,
+        .hero-right {
+          padding: 30px 15px;
+        }
+
+        .code-header {
+          padding: 0 15px 30px;
+        }
+
+        .project-card {
+          padding: 20px;
+        }
+
+        .discoveries-section {
+          padding: 30px 15px;
+        }
+
+        .culture-tab {
+          padding: 30px 15px;
+        }
+
+        .contact-section {
+          padding: 30px 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="logo">RAMTIN.IO</div>
+      <nav class="nav-links">
+        <a href="#about">ABOUT</a>
+        <a href="#code">CODE</a>
+        <a href="#discoveries">DISCOVERIES</a>
+        <a href="#culture">CULTURE</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+    </div>
+
+    <div class="main-container">
+      <section id="about" class="hero-section">
+        <div class="hero-left">
+          <h1 class="hero-title">SOFTWARE<br />ENGINEER</h1>
+          <p class="hero-subtitle">TECHNOLOGY • LINGUISTICS • ARTS</p>
+          <p class="hero-description">
+            Backend engineer focused on infrastructure, performance
+            optimisation, and developer experience. Outside code: swimming,
+            running, bouldering, analogue photography, Russian literature, short
+            story competitions.
+          </p>
+        </div>
+        <div class="hero-right">
+          <div>
+            <div class="stack-list">
+              GO<br />
+              RUST<br />
+              PYTHON<br />
+              TYPESCRIPT
+            </div>
+          </div>
+          <div class="contact-info">
+            <p><a href="mailto:ramtin.mesgari@gmail.com">EMAIL</a></p>
+            <p><a href="https://github.com/iamramtin/">GITHUB</a></p>
+            <p>
+              <a href="https://www.linkedin.com/in/ramtinmesgari/">LINKEDIN</a>
+            </p>
+            <p><a href="https://github.com/iamramtin/devstash">DEVSTASH</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="code" class="code-section">
+        <div class="code-grid">
+          <div class="code-header">
+            <h2 class="code-title">RAGE AGAINST THE MACHINE CODE</h2>
+            <p class="code-subtitle">
+              Open source contributions to projects that matter
+            </p>
+          </div>
+          <div class="projects-grid">
+            <div
+              class="project-card"
+              onclick="window.open('https://github.com/warpstreamlabs/bento', '_blank')"
+            >
+              <h3 class="project-name">WARPSTREAMLABS/BENTO</h3>
+              <div class="project-links">
+                <a href="https://github.com/warpstreamlabs/bento/issues/370"
+                  >ISSUE #370</a
+                >
+                <a href="https://github.com/warpstreamlabs/bento/pull/371"
+                  >PR #371</a
+                >
+                <a href="https://github.com/warpstreamlabs/bento/pull/380"
+                  >PR #380</a
+                >
+                <a href="https://github.com/warpstreamlabs/bento/pull/387"
+                  >PR #387</a
+                >
+                <a href="https://github.com/warpstreamlabs/bento/pull/393"
+                  >PR #393</a
+                >
+              </div>
+            </div>
+            <div
+              class="project-card"
+              onclick="window.open('https://github.com/localstack/localstack', '_blank')"
+            >
+              <h3 class="project-name">LOCALSTACK/LOCALSTACK</h3>
+              <div class="project-links">
+                <a href="https://github.com/localstack/localstack/issues/12602"
+                  >ISSUE #12602</a
+                >
+                <a href="https://github.com/localstack/localstack/pull/12615"
+                  >PR #12615</a
+                >
+              </div>
+            </div>
+            <div
+              class="project-card"
+              onclick="window.open('https://github.com/sinclairzx81/typebox', '_blank')"
+            >
+              <h3 class="project-name">SINCLAIRZX81/TYPEBOX</h3>
+              <div class="project-links">
+                <a href="https://github.com/sinclairzx81/typebox/issues/1281"
+                  >ISSUE #1281</a
+                >
+                <a href="https://github.com/sinclairzx81/typebox/pull/1282"
+                  >PR #1282</a
+                >
+              </div>
+            </div>
+            <div
+              class="project-card"
+              style="background: #c03434; color: #fff"
+              onclick="window.open('https://github.com/iamramtin?tab=repositories&type=source', '_blank')"
+            >
+              <h3 class="project-name" style="color: #fff">MORE PROJECTS</h3>
+              <p style="font-size: 12px; text-transform: uppercase">
+                BUILDING • CONTRIBUTING • EVOLVING
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="discoveries" class="discoveries-section">
+        <h2 class="discoveries-title">DISCOVERIES</h2>
+        <p
+          style="
+            font-size: 18px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+          "
+        >
+          TECHNICAL ARCHAEOLOGY
+        </p>
+
+        <div class="theory-block">
+          <h3 class="theory-name">APACHE KAFKA ETYMOLOGY THEORY</h3>
+          <p class="theory-text">
+            <b>Possible origin via Borges' "The Lottery in Babylon"</b>
+            <br />The sacred latrine Qaphqa was a messaging system for covert
+            information exchange.
+          </p>
+          <div class="theory-links">
+            <a href="https://lab6.com/4#page=7">FULL THEORY</a>
+            <a href="https://www.borges.pitt.edu/i/qaphqa">BORGES REFERENCE</a>
+          </div>
+        </div>
+
+        <div class="quote-section">
+          <p class="quote-text">
+            "The old Argentine knew that writing as a discipline is bounded by
+            the finite arrangements of the 10^80 particles offered by the
+            observable universe, hence we merely mine and explore that space in
+            the ultimate grid-based building game."
+          </p>
+        </div>
+      </section>
+
+      <section id="culture" class="culture-section">
+        <!-- READING -->
+        <div class="culture-tab">
+          <h3>READING</h3>
+          <div
+            class="culture-item"
+            onclick="window.open('https://www.lrb.co.uk/the-paper/v43/n10/adam-phillips/on-being-left-out', '_blank')"
+          >
+            <strong>ON BEING LEFT OUT</strong>
+            <span>Adam Phillips</span>
+          </div>
+          <div
+            class="culture-item"
+            onclick="window.open('https://www.theparisreview.org/letters-essays/6078/when-i-look-at-a-strawberry-i-think-of-a-tongue-edouard-leve', '_blank')"
+          >
+            <strong>WHEN I LOOK AT A STRAWBERRY, I THINK OF A TONGUE</strong>
+            <span>Édouard Levé</span>
+          </div>
+          <div
+            class="culture-item"
+            onclick="window.open('https://resobscura.substack.com/p/when-jorge-luis-borges-met-one-of', '_blank')"
+          >
+            <strong
+              >WHEN JORGE LUIS BORGES MET ONE OF THE FOUNDERS OF AI</strong
+            >
+            <span>Res Obscura</span>
+          </div>
+        </div>
+
+        <!-- LISTENING -->
+        <div class="culture-tab">
+          <h3>LISTENING</h3>
+          <div
+            class="culture-item"
+            onclick="window.open('https://music.apple.com/gb/album/monument/1579117958', '_blank')"
+          >
+            <strong>MONUMENT</strong>
+            <span>Portico Quartet</span>
+          </div>
+          <div
+            class="culture-item"
+            onclick="window.open('https://music.apple.com/jp/album/long-good-bye/720577490', '_blank')"
+          >
+            <strong>LONG GOOD-BYE</strong>
+            <span>Maki Asakawa</span>
+          </div>
+          <div
+            class="culture-item"
+            onclick="window.open('https://music.apple.com/us/album/random-access-memories-drumless-edition/1708115055', '_blank')"
+          >
+            <strong>RANDOM ACCESS MEMORIES (DRUMLESS EDITION)</strong>
+            <span>Daft Punk</span>
+          </div>
+        </div>
+
+        <!-- WATCHING -->
+        <div class="culture-tab">
+          <h3>WATCHING</h3>
+          <div
+            class="culture-item"
+            onclick="window.open('https://www.imdb.com/title/tt0092859/', '_blank')"
+          >
+            <strong>FOUR ADVENTURES OF REINETTE AND MIRABELLE</strong>
+            <span>Éric Rohmer</span>
+          </div>
+          <div
+            class="culture-item"
+            onclick="window.open('https://www.imdb.com/title/tt4538072/', '_blank')"
+          >
+            <strong>SAN JUNIPERO (Black Mirror)</strong>
+            <span>Owen Harris</span>
+          </div>
+          <div
+            class="culture-item"
+            onclick="window.open('https://www.imdb.com/title/tt0079944/', '_blank')"
+          >
+            <strong>STALKER</strong>
+            <span>Andrei Tarkovsky</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section">
+        <div class="contact-left">
+          <h2 class="contact-title">GET IN<br />TOUCH</h2>
+          <p class="contact-subtitle">AVAILABLE FOR COLLABORATION</p>
+        </div>
+        <div class="contact-right">
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="contact-label">EMAIL</span>
+              <a href="mailto:ramtin.mesgari@gmail.com" class="contact-link"
+                >ramtin.mesgari@gmail.com</a
+              >
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">GITHUB</span>
+              <a href="https://github.com/iamramtin/" class="contact-link"
+                >github.com/iamramtin</a
+              >
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">LINKEDIN</span>
+              <a
+                href="https://www.linkedin.com/in/ramtinmesgari/"
+                class="contact-link"
+                >linkedin.com/in/ramtinmesgari</a
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href").substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
